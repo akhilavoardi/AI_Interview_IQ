@@ -1,21 +1,19 @@
-import { use } from "react"
-import { Navigate,Outlet } from "react-router-dom"
+import { Navigate, Outlet } from 'react-router-dom'
 
-function ProtectedLayOut(){
+function ProtectedLayout() {
 
-    function redirect(){
-        const userCredentials = localStorage.getItem("user")
-        console.log(userCredentials)
 
-        if(userCredentials){
-            return <Navigate to="/"/>
-        }
-    }
+  const user = localStorage.getItem('user')
 
-    redirect()
-    return <div>
-        <Outlet/>
-    </div>
+  // navigate("/",{replace : true})
+
+  if(user){
+    return <Navigate to="/" replace />
+  }else{
+    return <Outlet />
+  }
+
+
 }
 
-export default ProtectedLayOut
+export default ProtectedLayout

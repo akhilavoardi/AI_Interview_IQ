@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useParams, useRoutes, useSearchParams } from "react-router-dom"
+import { BrowserRouter, Outlet, Route, Routes, useLocation, useParams, useRoutes, useSearchParams } from "react-router-dom"
 import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
@@ -9,88 +9,72 @@ import FallbackComponent from "./components/FallbackComponent"
 import Sidebar from "./components/Sidebar"
 import Profile from "./components/Profile"
 import { useState } from "react"
+import NewInterview from "./pages/NewInterview"
+import History from "./pages/History"
+import ContextProvider from "./components/ContextProvider"
 
 
 function App() {
 
-  const params = useParams()
-  const [hideSidebar,setHideSidebar] = useState(false)
-  // const searchParams = useSearchParams()
-
-  console.log(params)
-
-
-  /*
-
-  
-  if(route == "signup" || route =="login"){
-
-    setHideSidebar(true)
-  }
-  */
-
-  console.log(hideSidebar,'hide side bar')
-
   return (
     <>
 
-      <ToastContainer
-      // position="top-right"
-      // autoClose={2000}
-      // hideProgressBar={false}
-      // newestOnTop={false}
-      // closeOnClick={false}
-      // rtl={false}
-      // pauseOnFocusLoss
-      // draggable
-      // pauseOnHover
-      // theme="light"
-      // transition={Bounce}
-      />
-
-
-
+      <ToastContainer />
+      
       <BrowserRouter>
+        <Routes>
 
+          <Route element={<Layout />}>
 
-
-        <div className="flex h-screen">
-
-          {
-          
-            !hideSidebar  ? null :<div className="w-32 border">Sidebar</div>
-          }
-
-          <div>
-
-            <Routes>
-
-              <Route element={<ProtectedLayout />}>
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-              </Route>
+            <Route element={<ProtectedLayout />}>
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
 
 
               <Route element={<AuthProtectedRoute />}>
                 <Route path="*" element={<FallbackComponent />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/new-interview" element={<NewInterview />} />
+                <Route path="/history" element={<History />} />
               </Route>
-            </Routes>
 
+          </Route>
 
-          </div>
-        </div>
-
-
-
-
+        </Routes>
       </BrowserRouter>
-
-
-
     </>
   )
 }
+
+
+
+function Layout() {
+
+  const location = useLocation()
+
+  const isBarHidden = location.pathname == "/login" || location.pathname == "/signup"
+
+  return (
+    <div className="h-screen flex">
+
+      {
+        !isBarHidden && <div className="border w-46">
+          <Sidebar />
+
+        </div>
+      }
+
+      <div className=" w-full">
+
+        <Outlet />
+
+      </div>
+
+    </div>
+  )
+}
+
 
 export default App
