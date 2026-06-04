@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify'
 
 function Signup() {
 
-    const [formValues,setFormValues] = useState({name : "", email :"", age : 0, phone : "", password : "", confirmPassword : ""})
+    const [formValues,setFormValues] = useState({name : "", email :"", dob : "", phone : "", password : "", confirmPassword : ""})
    
     const navigate = useNavigate()
    
@@ -14,7 +14,7 @@ function Signup() {
 
         const {name,value} = e.target
 
-        console.log(name,value)
+        // console.log(name,value)
 
 
 
@@ -62,7 +62,7 @@ function Signup() {
         const body = {
             name : formValues.name,
             email : formValues.email,
-            age : formValues.age,
+            dob : formValues.dob,
             phone : formValues.phone,
             password : formValues.password
         }
@@ -95,8 +95,8 @@ function Signup() {
                     <input className='border' type="email" name='email' id='email' required onChange={updateFormData}  />
                 </div>
                 <div>
-                    <label htmlFor="age"> Age </label>
-                    <input className='border' type="number" name='age' id='age'  onChange={updateFormData}  />
+                    <label htmlFor="dob"> DOB </label>
+                    <input className='border' type="date" name='dob' id='dob'  onChange={updateFormData}  />
                 </div>  <div>
                     <label htmlFor="phone"> Phone </label>
                     <input className='border' type="text" name='phone' required value={formValues.phone} id='phone'  onChange={updateFormData}  />

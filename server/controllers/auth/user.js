@@ -5,7 +5,7 @@ import { generateJwtToken } from "../../utils/generateJwtToken.js"
 
 
 export const signup = async (req, res) => {
-    const { name, email, password, age, phone } = req.body
+    const { name, email, password, dob, phone } = req.body
 
     try {
 
@@ -73,7 +73,7 @@ export const login = async (req, res) => {
     const userDetails = {
         name: user.name,
         email: user.email,
-        age: user.age || null,
+        dob: user.dob || null,
         phone: user.phone,
     }
 
