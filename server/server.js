@@ -10,6 +10,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import authRouter from './routes/auth.js'
 import userRouter from './routes/user.js'
+import interviewRouter from './routes/interview.js'
 // import  jsonwebtoken  from 'jsonwebtoken'
 // import cookieParser from 'cookie-parser'
 
@@ -36,7 +37,7 @@ mongoose.connect(process.env.DB_URI).then(()=>{
 
 app.use("/auth",authRouter)
 app.use("/user",userRouter)
-
+app.use('/interview',interviewRouter)
 const port = process.env.PORT
 app.listen(port,()=>{
     console.log(`Server running on port ${port}`)
