@@ -31,9 +31,7 @@ mongoose.connect(process.env.DB_URI).then(()=>{
 
 
 
-// app.post("/auth/signup",(req,res)=>{
-//     console.log("api hitting directly")
-// })
+
 
 app.use("/auth",authRouter)
 app.use("/user",userRouter)
